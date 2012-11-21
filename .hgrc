@@ -1,0 +1,11 @@
+[ui]
+username="Daniel Fuentes<dfuentes@opnet.com>"
+merge = meld
+
+[merge-tools]
+meld.args = $local $base $other $output
+
+[extensions]
+hgext.convert=
+hgext.rebase=
+prompt = ~/hg-prompt/prompt.py
