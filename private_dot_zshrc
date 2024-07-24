@@ -109,7 +109,7 @@ if [[ ! ${ZIM_HOME}/init.zsh -nt ${ZDOTDIR:-${HOME}}/.zimrc ]]; then
   source ${ZIM_HOME}/zimfw.zsh init -q
 fi
 
-export FPATH="/home/dfuentes/.config/eza/eza/completions/zsh:$FPATH"
+export FPATH="${HOME}/.config/eza/eza/completions/zsh:$FPATH"
 # Initialize modules.
 source ${ZIM_HOME}/init.zsh
 
@@ -135,21 +135,25 @@ alias ls="eza -F -gh --group-directories-first --git --icons --hyperlink"
 
 # arch specific stuff
 if command -v systemctl > /dev/null; then
-  alias e='emacsclient -nc'
-  export EDITOR="emacsclient -c"
-  export VISUAL="emacsclient -c"
+  FZF=/usr/bin/fzf
   source /opt/asdf-vm/asdf.sh
 fi
 
 # mac specific stuff
 if [[ $(uname) == "Darwin" ]]; then
+  FZF=/opt/homebrew/bin/fzf
+  export PATH="/opt/homebrew/opt/grep/libexec/gnubin:$PATH"
+  export PATH="/Users/dfuentes/Library/Python/3.9/bin:$PATH"
 fi
 
-export PATH=/home/dfuentes/go/bin:/home/dfuentes/.local/bin:$PATH
+alias e='emacsclient -nc'
+export EDITOR="emacsclient -c"
+export VISUAL="emacsclient -c"
+export PATH=${HOME}/go/bin:${HOME}/.local/bin:$PATH
 [ "$TERM" = "xterm-kitty" ] && alias ssh="kitty +kitten ssh"
 
-source <(/usr/bin/fzf --zsh)
-source /home/dfuentes/.config/fzf/tinted-fzf/sh/base24-one-dark.sh
-source /home/dfuentes/.config/fzf/fzf-git.sh/fzf-git.sh
+source <(${FZF} --zsh)
+source ${HOME}/.config/fzf/tinted-fzf/sh/base24-one-dark.sh
+source ${HOME}/.config/fzf/fzf-git.sh/fzf-git.sh
 export LS_COLORS=$(vivid generate one-dark)
 export EZA_COLORS="da=0;38;2;220;174;234"
