@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+xrandr --output DP-3 --off --output DP-1 --off --output HDMI-0 --off --output DP-2 --primary --mode 3840x2160 --rate 160 --pos 3840x0 --rotate normal --output DP-4 --off --output HDMI-1 --off --output DP-0 --mode 3840x2160 --rate 160 --pos 0x0 --rotate normal --output DP-5 --off
+export QT_AUTO_SCREEN_SCALE_FACTOR=1
+export QT_ENABLE_HIGHDPI_SCALING=1
+
+# Fix steeef zsh theme
+export USER_COLOR=#DCAEEA
+export HOST_COLOR=#ECBE7B
+export PWD_COLOR=#98BE65
+export BRANCH_COLOR=#46D9FF
+export UNINDEXED_COLOR=#ECBE7B
+export INDEXED_COLOR=#98BE65
+export UNTRACKED_COLOR=#FF6C6B

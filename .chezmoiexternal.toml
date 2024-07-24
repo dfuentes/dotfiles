@@ -1,0 +1,20 @@
+[".config/eza/eza"]
+    type = "git-repo"
+    url = "https://github.com/eza-community/eza.git"
+    refreshPeriod="168h"
+    [".config/eza/eza".pull]
+        args = ["--ff-only"]
+
+[".config/fzf/tinted-fzf"]
+    type = "git-repo"
+    url = "https://github.com/tinted-theming/tinted-fzf"
+    refreshPeriod="168h"
+    [".config/fzf/tinted-fzf".pull]
+        args = ["--ff-only"]
+
+[".config/fzf/fzf-git.sh"]
+    type = "git-repo"
+    url = "https://github.com/junegunn/fzf-git.sh"
+    refreshPeriod ="168h"
+    [".config/fzf/fzf-git.sh".pull]
+        args = ["--ff-only"]
