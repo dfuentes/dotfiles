@@ -119,3 +119,8 @@
 (add-hook 'go-mode-hook (lambda()
                           (flycheck-golangci-lint-setup)
                           (setq flycheck-local-checkers '((lsp . ((next-checkers . (golangci-lint))))))))
+
+(setq mac-option-key-is-meta nil
+      mac-command-key-is-meta t
+      mac-command-modifier 'meta
+      mac-option-modifier 'super)
