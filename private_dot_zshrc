@@ -110,6 +110,13 @@ if [[ ! ${ZIM_HOME}/init.zsh -nt ${ZDOTDIR:-${HOME}}/.zimrc ]]; then
 fi
 
 export FPATH="${HOME}/.config/eza/eza/completions/zsh:$FPATH"
+
+# Setup brew completions
+if type brew &>/dev/null
+then
+  FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
+fi
+
 # Initialize modules.
 source ${ZIM_HOME}/init.zsh
 
