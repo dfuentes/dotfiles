@@ -42,6 +42,8 @@ exec --no-startup-id unclutter -b
 # https://wiki.archlinux.org/index.php/XDG_Autostart
 exec --no-startup-id dex --autostart --environment i3
 exec --no-startup-id powerkit
+exec --no-startup-id snixembed
+exec --no-startup-id iwgtk -i
 # The combination of xss-lock, nm-applet and pactl is a popular choice, so
 # they are included here as an example. Modify as you see fit.
 
@@ -51,7 +53,7 @@ exec --no-startup-id xss-lock --transfer-sleep-lock -- /home/dfuentes/.config/i3
 
 # NetworkManager is the most popular way to manage wireless networks on Linux,
 # and nm-applet is a desktop environment-independent system tray GUI for it.
-exec --no-startup-id nm-applet
+# exec --no-startup-id nm-applet
 exec --no-startup-id /usr/lib/polkit-kde-authentication-agent-1
 exec --no-startup-id /usr/bin/dunst
 exec --no-startup-id /usr/bin/1password --silent
