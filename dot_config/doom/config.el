@@ -137,3 +137,5 @@
           "--header-insertion=never"
           "--header-insertion-decorators=0"))
   (set-lsp-priority! 'clangd 2))
+
+(setq mac-command-modifier 'none)
