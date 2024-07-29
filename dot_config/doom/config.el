@@ -78,8 +78,16 @@
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
 
+(after! ace-window
+  (global-set-key (kbd "M-o") 'ace-window))
+
 (after! persp-mode
   (setq persp-emacsclient-init-frame-behaviour-override "main"))
+
+(after! lsp-mode
+  ;; https://github.com/emacs-lsp/lsp-mode/issues/3577#issuecomment-1709232622
+  (delete 'lsp-terraform lsp-client-packages))
+
 
 (map! "M-n" #'drag-stuff-down
       "M-p" #'drag-stuff-up)
@@ -119,3 +127,13 @@
 (add-hook 'go-mode-hook (lambda()
                           (flycheck-golangci-lint-setup)
                           (setq flycheck-local-checkers '((lsp . ((next-checkers . (golangci-lint))))))))
+
+(after! lsp-clangd
+  (setq lsp-clients-clangd-args
+        '("-j=3"
+          "--background-index"
+          "--clang-tidy"
+          "--completion-style=detailed"
+          "--header-insertion=never"
+          "--header-insertion-decorators=0"))
+  (set-lsp-priority! 'clangd 2))
