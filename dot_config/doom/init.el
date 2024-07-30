@@ -1,3 +1,8 @@
+;; (defadvice! straight-use-recipes-ignore-nongnu-elpa-a (fn recipe)
+;;   :around #'straight-use-recipes
+;;   (unless (eq 'nongnu-elpa (car recipe))
+;;     (funcall fn recipe)))
+
 ;;; init.el -*- lexical-binding: t; -*-
 
 ;; This file controls what Doom modules are enabled and what order they load
