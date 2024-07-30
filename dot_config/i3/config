@@ -96,6 +96,7 @@ bindsym $mod+shift+e exec --no-startup-id "rofi -show p -modi p:'rofi-power-menu
 # .desktop file. It is a wrapper around dmenu, so you need that installed.
 # bindcode $mod+40 exec --no-startup-id i3-dmenu-desktop
 
+bindsym $mod+shift+m exec --no-startup-id /home/dfuentes/.config/i3/wakescreen.sh
 # change focus
 bindsym $mod+j focus left
 bindsym $mod+k focus down
