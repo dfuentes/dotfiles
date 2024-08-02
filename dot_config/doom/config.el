@@ -92,6 +92,10 @@
   ;; https://github.com/emacs-lsp/lsp-mode/issues/3577#issuecomment-1709232622
   (delete 'lsp-terraform lsp-client-packages))
 
+(after! lua-mode
+  (setq lua-indent-nested-block-content-align nil)
+  (setq lua-indent-level 2)
+  (setq lua-indent-close-paren-align nil))
 
 (map! "M-n" #'drag-stuff-down
       "M-p" #'drag-stuff-up)
@@ -143,3 +147,6 @@
   (set-lsp-priority! 'clangd 2))
 
 (setq mac-command-modifier 'none)
+
+(setq typescript-indent-level 2)
+(setq typescript-ts-mode-indent-offset 2)
