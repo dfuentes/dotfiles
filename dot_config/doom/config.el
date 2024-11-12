@@ -82,7 +82,8 @@
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
 
-(after! ace-window
+(use-package! ace-window
+  :config
   (global-set-key (kbd "M-o") 'ace-window))
 
 (after! persp-mode
@@ -150,3 +151,9 @@
 
 (setq typescript-indent-level 2)
 (setq typescript-ts-mode-indent-offset 2)
+
+(require 'uniquify)
+(setq uniquify-buffer-name-style 'forward)
+(setq uniquify-separator "/")
+(setq uniquify-after-kill-buffer-p t)
+(setq uniquify-ignore-buffers-re "^\\*")
