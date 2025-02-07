@@ -165,6 +165,38 @@ source ${HOME}/.config/fzf/fzf-git.sh/fzf-git.sh
 export LS_COLORS=$(vivid generate one-dark)
 export EZA_COLORS="da=0;38;2;220;174;234"
 
+# ripgrep->fzf->emacs [QUERY]
+rfe() (
+  RELOAD='reload:rg --column --color=always --smart-case {q} || :'
+  OPENER='emacsclient -nc +{2} {1}'
+  fzf --disabled --ansi \
+      --bind "start:$RELOAD" --bind "change:$RELOAD" \
+      --bind "enter:become:$OPENER" \
+      --bind "ctrl-o:execute:$OPENER" \
+      --bind 'ctrl-/:toggle-preview' \
+      --delimiter : \
+      --preview 'bat --style=full --color=always --highlight-line {2} {1}' \
+      --preview-window '~4,+{2}+4/3,<80(up)' \
+      --query "$*"
+)
+
+ytm() (
+  PLAYLIST="$*"
+  MUSIC_ROOT="$HOME/Music"
+
+  yt-dlp -v "$PLAYLIST" --cookies-from-browser firefox --embed-metadata --extract-audio \
+    -o "$MUSIC_ROOT/%(artist)s/%(album)s/%(playlist_index)s - %(track)s.%(ext)s"
+)
+
+ytr() (
+  PLAYLIST="$*"
+  MUSIC_ROOT="$HOME/reedmusic"
+
+  yt-dlp -v "$PLAYLIST" --cookies-from-browser firefox --extract-audio \
+    --audio-format mp3 --audio-quality 0 -o "$MUSIC_ROOT/%(title)s.%(ext)s"
+)
+
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+

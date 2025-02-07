@@ -41,7 +41,6 @@ exec --no-startup-id unclutter -b
 # Start XDG autostart .desktop files using dex. See also
 # https://wiki.archlinux.org/index.php/XDG_Autostart
 exec --no-startup-id dex --autostart --environment i3
-exec --no-startup-id powerkit
 exec --no-startup-id snixembed
 exec --no-startup-id iwgtk -i
 # The combination of xss-lock, nm-applet and pactl is a popular choice, so
@@ -97,6 +96,7 @@ bindsym $mod+shift+e exec --no-startup-id "rofi -show p -modi p:'rofi-power-menu
 # bindcode $mod+40 exec --no-startup-id i3-dmenu-desktop
 
 bindsym $mod+shift+m exec --no-startup-id /home/dfuentes/.config/i3/wakescreen.sh
+bindsym $mod+shift+v exec --no-startup-id /home/dfuentes/.config/i3/switch-to-mac-display.sh
 # change focus
 bindsym $mod+j focus left
 bindsym $mod+k focus down
