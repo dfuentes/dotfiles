@@ -50,3 +50,6 @@
 ;; (unpin! t)
 
 (package! ace-window)
+(package! arduino-mode)
+(package! arduino-cli-mode)
+(package! auto-minor-mode)

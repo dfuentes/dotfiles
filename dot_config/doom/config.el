@@ -22,7 +22,7 @@
 ;; accept. For example:
 ;;
 
-(setq doom-font (font-spec :family "CaskaydiaCove Nerd Font" :size 24))
+(setq doom-font (font-spec :family "CaskaydiaCove Nerd Font" :size 16))
 (if (featurep :system 'macos)
     (setq doom-font (font-spec :family "CaskaydiaCove Nerd Font" :size 16)))
 
@@ -86,12 +86,58 @@
   :config
   (global-set-key (kbd "M-o") 'ace-window))
 
+;; (use-package! arduino-cli-mode
+;;   :ensure t
+;;   :hook arduino-mode
+;;   :mode "\\.ino\\'"
+;;   :custom
+;;   (arduino-cli-warnings 'all)
+;;   (arduino-cli-verify t))
+
+
+
 (after! persp-mode
   (setq persp-emacsclient-init-frame-behaviour-override "main"))
 
+(after! auto-minor-mode
+  (add-to-list 'auto-minor-mode-alist '("\\.ino\\'" . arduino-cli-mode)
+               ))
+
 (after! lsp-mode
+  (setq lsp-enable-snippet nil)
   ;; https://github.com/emacs-lsp/lsp-mode/issues/3577#issuecomment-1709232622
-  (delete 'lsp-terraform lsp-client-packages))
+  (delete 'lsp-terraform lsp-client-packages)
+  (add-to-list 'lsp-language-id-configuration '(arduino-mode . "arduino"))
+  (lsp-register-client (make-lsp-client
+                        :new-connection (lsp-stdio-connection '(
+                                                                "arduino-language-server"
+                                                                "-clangd"
+                                                                "/usr/bin/clangd"
+                                                                "-cli"
+                                                                "/usr/bin/arduino-cli"
+                                                                "-cli-config"
+                                                                "/home/dfuentes/.arduino15/arduino-cli.yaml"
+                                                                "-fqbn"
+                                                                "arduino:renesas_uno:unor4wifi"
+                                                                ))
+                        :activation-fn (lsp-activate-on "arduino")
+                        :server-id 'lsp-arduino-language-server
+                        :priority -1
+                        :major-modes '(arduino-mode)
+                        ))
+  ;;(add-hook 'arduino-mode-hook 'lsp)
+  )
+
+
+;; (setq arduino-file-extensions '"\\(.ino\\|.c\\|.cpp\\|.h\\|.hpp\\)")
+;; (defun arduino-mode-listen ()
+;;   "Open files in Arduino mode if they match the extensions and are in the ~/Arduino directory or its subdirectories."
+;;   (let ((file-name (buffer-file-name)))
+;;     (when (and file-name
+;;                (string-prefix-p (expand-file-name "~/Arduino/") (file-name-directory file-name))
+;;                (string-match arduino-file-extensions (file-name-nondirectory file-name)))
+;;       (arduino-mode))))
+;; (add-hook 'find-file-hook 'arduino-mode-listen)
 
 (after! lua-mode
   (setq lua-indent-nested-block-content-align nil)
