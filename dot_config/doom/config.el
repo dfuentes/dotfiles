@@ -1,5 +1,6 @@
 ;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
 
+(doom-load-envvars-file "~/.config/doom/myenv")
 ;; Place your private configuration here! Remember, you do not need to run 'doom
 ;; sync' after modifying this file!
 
@@ -198,8 +199,17 @@
 (setq typescript-indent-level 2)
 (setq typescript-ts-mode-indent-offset 2)
 
-(require 'uniquify)
-(setq uniquify-buffer-name-style 'forward)
-(setq uniquify-separator "/")
-(setq uniquify-after-kill-buffer-p t)
-(setq uniquify-ignore-buffers-re "^\\*")
+(add-hook 'doom-init-ui-hook
+          (lambda ()
+            (require 'uniquify)
+            (setq uniquify-buffer-name-style 'forward
+                  uniquify-separator "/"
+                  uniquify-after-kill-buffer-p t
+                  uniquify-ignore-buffers-re "^\\*"))
+          100)
+
+;; Monet - MCP tools for Claude Code integration
+(use-package! monet
+  :config
+  (monet-mode 1)
+  (monet-start-server))

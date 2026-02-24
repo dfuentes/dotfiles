@@ -53,3 +53,5 @@
 (package! arduino-mode)
 (package! arduino-cli-mode)
 (package! auto-minor-mode)
+(package! websocket)
+(package! monet :recipe (:host github :repo "stevemolitor/monet"))
